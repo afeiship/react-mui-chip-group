@@ -58,6 +58,15 @@ export default class extends Component {
     this.change(value);
   };
 
+  _onClick = (inItem) => {
+    const { onClick } = this.props;
+    onClick({
+      target: {
+        value: inItem
+      }
+    });
+  };
+
   render() {
     const { className, value, editable, onClick, onChange, ...props } = this.props;
     const onDelete = editable ? this._onDelete.bind(this, item) : null;
@@ -73,7 +82,7 @@ export default class extends Component {
                   key={index}
                   label={label}
                   onDelete={onDelete}
-                  onClick={onClick}
+                  onClick={this._onClick.bind(this, item)}
                   {...itemProps}
                 />
               )
