@@ -12,11 +12,13 @@ export default class extends Component {
     className: PropTypes.string,
     value: PropTypes.array,
     onChange: PropTypes.func,
+    editable: PropTypes.bool,
   };
 
   static defaultProps = {
     value: [],
-    onChange: noop
+    onChange: noop,
+    editable: false,
   };
   /*===properties end===*/
 
@@ -55,7 +57,8 @@ export default class extends Component {
   };
 
   render() {
-    const { className, value, onChange, ...props } = this.props;
+    const { className, value, editable, onChange, ...props } = this.props;
+    const onDelete = editable ? this._onDelete.bind(this, item) : null;
     return (
       <section className={classNames('react-mui-chip-group', className)} {...props}>
         {
@@ -64,9 +67,10 @@ export default class extends Component {
               const { value, label, ...itemProps } = item;
               return (
                 <Chip
+                  className="react-mui-chip-group-item"
                   key={index}
                   label={label}
-                  onDelete={this._onDelete.bind(this, item)}
+                  onDelete={onDelete}
                   {...itemProps}
                 />
               )

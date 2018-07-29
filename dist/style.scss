@@ -3,5 +3,7 @@ $react-mui-chip-group-options:(
 )!default;
 
 .react-mui-chip-group{
-  color:#000;
+  &-item{
+    margin-right: 10px;
+  }
 }
